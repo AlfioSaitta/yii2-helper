@@ -1,0 +1,21 @@
+{
+    "name": "anli/yii2-helper",
+    "description": "Helper for Yii 2.0",
+    "type": "yii2-extension",
+    "keywords": ["yii2","extension"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Su Anli",
+            "email": "anli@euqol.com"
+        }
+    ],
+    "require": {
+        "yiisoft/yii2": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "anli\\helper\\": ""
+        }
+    }
+}
