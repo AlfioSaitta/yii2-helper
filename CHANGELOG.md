@@ -5,3 +5,4 @@ CHANGELOG
 -----
 
 * Initial release
+* `enh` Added modal feature
