@@ -22,10 +22,53 @@ or add
 to the require section of your `composer.json` file.
 
 
-Usage
+Copy the contents of the `js` folder to the `@web/js/` folder.
+
+Modal
 -----
 
-Once the extension is installed, simply use it in your code by  :
+Add to your layout file:
 
-```php
-<?= \anli\helper\AutoloadExample::widget(); ?>```
+    use anli\helper\assets\ModalAsset;
+    ...
+    <!-- BEGIN MODAL -->
+    <?php Modal::begin(['id' => 'modal', 'size' => 'modal-lg',]);
+        echo "<div id='modalContent'><div style=\"text-align:center\">" . Html::img('@web/images/ajax-loader.gif') . "</div></div>";
+    Modal::end();?>
+    <!-- END MODAL -->
+
+To create a button to open a modal, update its `value` to the controller url and `class` to `showModalButton`. For example:
+
+    Html::a('<i class="fa fa-plus"></i>', false, ['value' => Url::to(['tenant/create']), 'title' => 'Create Tenant', 'class' => 'showModalButton btn btn-circle green-haze btn-sm'])
+
+To use ajax validation and submit:
+
+Update the controller action with:
+
+```
+$model = new Tenant();
+
+if ($model->load(Yii::$app->request->post()) && $model->save()) {
+     Yii::$app->response->format = Response::FORMAT_JSON;
+     return [
+        'message' => 'successful',
+     ];
+}
+
+if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && isset($_POST['ajax'])) {
+    Yii::$app->response->format = Response::FORMAT_JSON;
+    return \yii\widgets\ActiveForm::validate($model);
+}
+
+return $this->renderAjax('create', [
+    'model' => $model
+]);
+```
+
+Update the view `_form` with:
+
+    <?php $form = ActiveForm::begin(['id' => $model->formName(),
+        'options' => ['class' => 'modalSubmit'],
+        'enableAjaxValidation' => false,
+        'enableClientValidation' => true,
+    ]); ?>
