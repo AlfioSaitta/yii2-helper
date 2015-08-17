@@ -89,3 +89,20 @@ Add to the `actions` function in your controller:
             'name' => 'name',
         ],
     ],
+
+Export Action
+-----
+
+Add the button in the view page:
+
+    Html::a('<i class="fa fa-cloud-download"></i>', ['tenant/export'], ['title' => 'Export Tenant', 'class' => 'btn btn-circle yellow btn-sm', 'data-pjax' => 0]),
+
+Add to the `actions` function in your controller:
+
+    'export' => [
+        'class' => 'anli\helper\actions\ExportAction',
+        'query' => Tenant::find(),
+        'attributes' => [
+            'name' => 'name',
+        ],
+    ],
