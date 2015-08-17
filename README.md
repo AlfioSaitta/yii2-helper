@@ -72,3 +72,20 @@ Update the view `_form` with:
         'enableAjaxValidation' => false,
         'enableClientValidation' => true,
     ]); ?>
+
+Import Action
+-----
+
+Add the button in the view page:
+
+    Html::a('<i class="fa fa-download"></i>', false, ['value' => Url::to(['tenant/import']), 'title' => 'Import Tenant', 'class' => 'showModalButton btn btn-circle blue btn-sm']),
+
+Add to the `actions` function in your controller:
+
+    'import' => [
+        'class' => 'anli\helper\actions\ImportAction',
+        'importModelName' => '\anli\auth0\models\Tenant',
+        'attributes' => [
+            'name' => 'name',
+        ],
+    ],
