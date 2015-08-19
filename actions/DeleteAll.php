@@ -29,6 +29,7 @@ use yii\base\UserException;
  *             'delete-all' => [
  *                'class' => 'sual0001\helper\actions\DeleteAllAction'
  *                'modelFullName' => self::MODEL_FULL_NAME(),
+ *                'conditions' => ['tenant_id' => Yii::$app->tenant->identity->id, 'user_id' => Yii::$app->user->id],
  *             ],
  *         ];
  *     }
@@ -48,14 +49,17 @@ class DeleteAll extends Action
     public $modelFullName;
 
     /**
-     * @var string
+     * @var array
      */
-    public $tenantId;
+    public $conditions = [];
 
     /**
-     * @var boolean
+     * Initializes the widget.
      */
-    public $noTenant = false;
+    public function init()
+    {
+       parent::init();
+    }
 
     /**
      * Runs the action
@@ -66,21 +70,13 @@ class DeleteAll extends Action
     {
         $model = $this->modelFullName;
 
-        if (!$this->noTenant) {
-            $model::deleteAll(['tenant_id' => $this->tenantId]);
 
+        if ($model::deleteAll($this->conditions)) {
             Yii::$app->getSession()->setFlash('success', 'You have deleted all selected records!');
             return $this->controller->goBack();
-
-        } else {
-            $model::deleteAll();
-
-            Yii::$app->getSession()->setFlash('success', 'You have deleted all selected records!');
-            return $this->controller->goBack();
-            
         }
 
-        Yii::$app->getSession()->setFlash('error', 'Delate All Action configuration error!');
+        Yii::$app->getSession()->setFlash('error', 'You have failed to deleted all selected records!');
 		return $this->controller->goBack();
     }
 }

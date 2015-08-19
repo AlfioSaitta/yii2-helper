@@ -19,25 +19,14 @@ class Select2Asset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $basePath = '@webroot';
-
-    /**
-     * @inheritdoc
-     */
-    public $baseUrl = '@web/';
+    public $sourcePath = '@vendor/anli/yii2-helper/';
 
     /**
      * @inheritdoc
      */
     public $css = [
         'css/select2.css',
-    ];
-
-    /**
-     * @inheritdoc
-     */
-    public $js = [
-    ];
+    ];    
 
     /**
      * @inheritdoc

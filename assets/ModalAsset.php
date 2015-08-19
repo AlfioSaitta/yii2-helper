@@ -19,18 +19,7 @@ class ModalAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $basePath = '@webroot';
-
-    /**
-     * @inheritdoc
-     */
-    public $baseUrl = '@web/';
-
-    /**
-     * @inheritdoc
-     */
-    public $css = [
-    ];
+    public $sourcePath = '@vendor/anli/yii2-helper/';
 
     /**
      * @inheritdoc
