@@ -106,3 +106,72 @@ Add to the `actions` function in your controller:
             'name' => 'name',
         ],
     ],
+
+Checkbox column in Gridview
+-----
+
+In the view page, add to the `columns` section in the GridView widget with:
+
+    ...
+    ->checkbox()
+    ...
+
+Add `checkbox()` function to the model Column file with:
+
+```
+/**
+ * @return mixed
+ */
+public function checkbox()
+{
+    $this->columns = array_merge($this->columns, [
+        [
+            'class' => 'yii\grid\CheckboxColumn',
+        ],
+    ]);
+    return $this;
+}
+```
+
+Add the button to the view page with:
+
+    Html::a('<i class="fa fa-trash"></i> Delete selected', '#', ['title' => 'Delete Selected Tenant', 'class' => 'selectCheckboxButton', 'value-url' => 'http://url/to/controller/action', 'value-id' => 'my-gridview-id',]);
+
+Add the `action` to the controller with:
+
+```
+/**
+ * @param string
+ * @return string
+ */
+public function actionDeleteCheckbox($keylist)
+{
+    $keylist = explode(",", $keylist);
+
+    $count = count($keylist);
+
+    foreach ($keylist as $id) {
+        $this->findModel($id)->delete();
+    }
+
+    Yii::$app->getSession()->setFlash('success', "You have deleted $count tenant!");
+
+    return $this->goBack();
+
+    Yii::$app->response->format = Response::FORMAT_JSON;
+    return [
+       'message' => $keylist,
+    ];
+}
+```
+
+Button Group
+-----
+
+Add to view page with:
+
+    use anli\metronic\widgets\ButtonGroup;
+    ...
+
+    ButtonGroup::widget(['buttons' => [$button1, $button2, $button3]])
+    
