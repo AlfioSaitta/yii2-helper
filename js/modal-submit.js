@@ -11,10 +11,13 @@ $('body').on('beforeSubmit', 'form.modalSubmit', function () {
           data: form.serialize(),
           success: function (response) {
               $('#modal').modal('hide');
+              
+              if ($('#message-pjax').length) {
+                  $.pjax.reload({container: "#message-pjax", async:false});
+              }
 
-              // update container-pjax if it exist
               if ($('#container-pjax').length) {
-                  $.pjax.reload('#container-pjax');
+                  $.pjax.reload({container: "#container-pjax", async:false});
               }
           }
      });
