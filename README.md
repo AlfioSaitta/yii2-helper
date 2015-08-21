@@ -249,3 +249,41 @@ public function actionGetTimesheetHeatmapData($id = null)
     return $data;
 }
 ```
+
+Cal Heatmap
+-----
+
+Add your view file with:
+
+    use anli\helper\widgets\CalHeatmap;
+    ...
+    <?= CalHeatmap::widget(['url' => ['user/get-timesheet-heatmap-data']]); ?>
+
+Add your controller with:
+
+```
+/**
+ * @param mixed $id
+ * @return string
+ */
+public function actionGetTimesheetHeatmapData($id = null)
+{
+    if (!isset($id)) {
+        $id = Yii::$app->user->id;
+    }
+
+    $query = $this->findModel($id)
+    ->getTimesheets()
+    ->select('timesheet_date, sum(work_hour) AS work_hour')
+    ->groupBy('timesheet_date');
+
+    $data = [];
+    foreach ($query->all() as $record) {
+        $date = new \DateTime($record->timesheet_date);
+        $data[$date->getTimestamp()] = (float)$record->work_hour;
+    }
+
+    Yii::$app->response->format = Response::FORMAT_JSON;
+    return $data;
+}
+```
