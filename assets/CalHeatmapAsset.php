@@ -17,14 +17,16 @@ use yii\web\View;
  */
 class CalHeatmapAsset extends AssetBundle
 {
-    public $basePath = '@webroot';
-    public $baseUrl = '@web';
+    /**
+     * @inheritdoc
+     */
+    public $sourcePath = '@vendor/anli/yii2-helper/';
 
     /**
      * @inheritdoc
      */
     public $css = [
-        '/cal-heatmap/cal-heatmap.css',
+        'css/cal-heatmap.css',
     ];
 
     /**
@@ -32,7 +34,7 @@ class CalHeatmapAsset extends AssetBundle
      */
     public $js = [
         'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js',
-        '/cal-heatmap/cal-heatmap.min.js',
+        'js/cal-heatmap.min.js',
     ];
 
     /**
