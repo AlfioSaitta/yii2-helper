@@ -52,7 +52,7 @@ class ExcelImportForm extends model
     public function rules()
     {
         return [
-			[['file'], 'safe'],
+			[['file'], 'required'],
 			[['file'], 'file', 'extensions'=>'xls, xlsx'],
 		];
     }

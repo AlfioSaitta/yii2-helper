@@ -29,6 +29,11 @@ class CalHeatmap extends Widget
     public $url = '';
 
     /**
+     * @param string
+     */
+    public $legend = '[8,12,16,20]';
+
+    /**
      * Initializes the widget.
      */
     public function init()
@@ -53,27 +58,51 @@ class CalHeatmap extends Widget
      */
     public function getJs()
     {
-        return '
-        <script type="text/javascript">
+        $url = Url::to(['timesheet/list', 'userId' => Yii::$app->user->id]);
+
+        return "
+        <script type=\"text/javascript\">
             now = new Date();
             now.setMonth(now.getMonth() - 1);
 
             var cal = new CalHeatMap();
         	cal.init({
-            	domain: "month",
-            	subDomain: "x_day",
-                data: "' . $this->url . '",
+            	domain: \"month\",
+            	subDomain: \"x_day\",
+                data: \"$this->url\",
             	start: now,
             	cellSize: 20,
             	cellPadding: 5,
             	domainGutter: 20,
             	range: 2,
             	domainDynamicDimension: false,
-            	//subDomainTextFormat: "%d",
-                highlight: "now",
+                highlight: \"now\",
                 tooltip: false,
-            	legend: [2, 4, 6, 8]
+            	legend: $this->legend,
+                onClick: function(date, value) {
+                    $this->onClickJs;
+            	},
             });
-        </script>';
+        </script>";
+    }
+
+    public function getOnClickJs()
+    {
+        $url = Url::to(['timesheet/list', 'userId' => Yii::$app->user->id]);
+
+        return "
+            var myDate = new moment(date);
+            var url = \"$url\";
+            var url = url.concat(\"&timesheetDate=\", myDate.format(\"YYYY-MM-DD\"));
+            console.log(url);
+
+            $('#modal').modal('show')
+                    .find('#modalContent')
+                    .load(url);
+            $('#modal').on('shown.bs.modal', function () {
+                $('textarea:visible:first').focus();
+                $('input:visible:first').focus();
+            })
+        ";
     }
 }

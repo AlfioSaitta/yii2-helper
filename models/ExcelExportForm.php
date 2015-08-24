@@ -5,69 +5,40 @@
  * @license http://www.euqol.com/license/
  */
 
-namespace anli\helper\actions;
+namespace anli\helper\models;
 
+use yii\base\model;
 use Yii;
-use yii\base\Action;
-use yii\base\Exception;
-use yii\base\UserException;
 
 /**
- * ExportAction export all records for the model.
+ * This is the excel export form model class.
  *
- * To use ExportAction, you need to do the following steps:
- *
- * First, declare an action of ExportAction type in the `actions()` method of your `SiteController`
- * class (or whatever controller you prefer), like the following:
- *
- * ```php
- * public function actions()
- * {
- *     return [
- *        'export' => [
- *           'class' => 'anli\helper\actions\ExportAction',
- *           'query' => UserRole::find(),
- *           'attributes' => [
- *               'user' => [
- *                   'relationship' => 'user',
- *                   'attribute' => 'username',
- *                   'header' => 'role.name',
- *               ],
- *               'role' => [
- *                   'relationship' => 'role',
- *                   'attribute' => 'name',
- *               ],
- *               'role_id' => 'role_id',
- *          ],
- *        ],
- *    ];
- * }
- * ```
+ * @author Su Anli <anli@euqol.com>
+ * @since 1.2.0
  */
-class ExportAction extends Action
+class ExcelExportForm extends model
 {
-
-    /**
+	/**
      * @var array
      */
     public $attributes = [];
 
-    /**
+	/**
      * @var mixed
      */
     public $query;
 
-    /**
+	/**
      * @var string The exported file name
      */
     public $file = 'export.xls';
 
-    /**
+	/**
      * Runs the action
      *
      * @return string result content
      */
-    public function run()
+    public function export()
     {
         $objPHPExcel = new \PHPExcel();
 
@@ -93,7 +64,7 @@ class ExportAction extends Action
         return true;
     }
 
-    /**
+	/**
      * @return array
      */
     protected function getExcelData()

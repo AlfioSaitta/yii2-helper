@@ -122,6 +122,11 @@ class ImportAction extends Action
             return $this->controller->goBack();
         }
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && isset($_POST['ajax'])) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+
         return $this->controller->renderAjax($this->importFormViewPath, [
             'model'=>$model,
             'importSafeAttributes' => $this->attributes

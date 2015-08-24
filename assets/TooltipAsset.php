@@ -8,14 +8,13 @@
 namespace anli\helper\assets;
 
 use yii\web\AssetBundle;
-use yii\web\View;
 
 /**
- * This is the ajax update asset bundle.
+ * This is the bootstrap tooltip asset bundle.
  * @author Su Anli <anli@euqol.com>
  * @since 1.2.0
  */
-class CalHeatmapAsset extends AssetBundle
+class TooltipAsset extends AssetBundle
 {
     /**
      * @inheritdoc
@@ -25,27 +24,15 @@ class CalHeatmapAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $css = [
-        'css/cal-heatmap.css',
-    ];
-
-    /**
-     * @inheritdoc
-     */
     public $js = [
-        'https://cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js',
-        'js/cal-heatmap.min.js',
-        'js/moment.min.js',
+        'js/tooltip-init.js',
     ];
-
-    /**
-     * @inheritdoc
-     */
-    public $jsOptions = ['position' => View::POS_HEAD];
 
     /**
      * @inheritdoc
      */
     public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }
