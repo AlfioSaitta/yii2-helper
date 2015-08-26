@@ -11,31 +11,33 @@ use yii\web\AssetBundle;
 use yii\web\View;
 
 /**
- * This is the ajax update asset bundle.
+ * This is the Morris Js asset bundle.
  * @author Su Anli <anli@euqol.com>
  * @since 1.2.0
  */
-class CalHeatmapAsset extends AssetBundle
+class MorrisJsAsset extends AssetBundle
 {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/anli/yii2-helper/';
+    public $sourcePath = null;
 
     /**
      * @inheritdoc
      */
     public $css = [
-        '//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css',
+        '//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css',
+
     ];
 
     /**
      * @inheritdoc
      */
     public $js = [
-        '//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js',
-        '//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js',
-        '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js',
+
+        '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
+        '//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js',
+
     ];
 
     /**
@@ -47,5 +49,7 @@ class CalHeatmapAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
+        'yii\web\YiiAsset',
+        'yii\bootstrap\BootstrapAsset',
     ];
 }

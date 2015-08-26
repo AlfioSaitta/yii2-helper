@@ -27,8 +27,8 @@ use yii\base\UserException;
  *     {
  *         return [
  *             'delete-all' => [
- *                'class' => 'sual0001\helper\actions\DeleteAllAction'
- *                'modelFullName' => self::MODEL_FULL_NAME(),
+ *                'class' => 'anli\helper\actions\DeleteAllAction',
+ *                'modelFullName' => self::MODEL_FULL_NAME,
  *                'conditions' => ['tenant_id' => Yii::$app->tenant->identity->id, 'user_id' => Yii::$app->user->id],
  *             ],
  *         ];
@@ -41,7 +41,7 @@ use yii\base\UserException;
  *
  * ```
  */
-class DeleteAll extends Action
+class DeleteAllAction extends Action
 {
     /**
      * @var string
