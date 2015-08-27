@@ -287,3 +287,41 @@ public function actionGetTimesheetHeatmapData($id = null)
     return $data;
 }
 ```
+
+Morris Js
+-----
+
+Add to your view with:
+
+    use anli\helper\widgets\MorrisJs;
+    ...
+    <?= MorrisJs::widget(['url' => Url::to(['timesheet/get-morris-js', 'userId' => $user->id]), 'xkey' => "'period'", 'ykeys' => "['worked']", 'labels' => "['Hours']"]); ?>
+
+Add to your controller with:
+
+```
+/**
+ * @return string
+ */
+public function actionGetMorrisJs($userId = null)
+{
+    $user = User::findOne($userId);
+
+    $array = [];
+    $x = 0;
+    for ($i = 6; $i >= 0 ; $i--) {
+        $date = new \DateTime("today -$i months");
+        $array[$x]['period'] = $date->format('F Y');
+        $array[$x]['worked'] = (float)$user->getTimesheets()->byTimesheetMonth($date->format('Y-m-01'))->sum('work_hour');
+        $x++;
+    }
+
+    Yii::$app->response->format = Response::FORMAT_JSON;
+    return [
+        'data' => $array,
+        'xkey' => "'period'",
+        'ykeys' => "['worked']",
+        'labels' => "['Hours']",
+    ];
+}
+```

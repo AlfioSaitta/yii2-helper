@@ -43,11 +43,6 @@ class MorrisJsAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $jsOptions = ['position' => View::POS_HEAD];
-
-    /**
-     * @inheritdoc
-     */
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',

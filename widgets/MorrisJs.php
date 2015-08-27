@@ -26,7 +26,22 @@ class MorrisJs extends Widget
     /**
      * @var string
      */
-    public $data = '';
+    public $xkey = '';
+
+    /**
+     * @var string
+     */
+    public $ykeys = '';
+
+    /**
+     * @var string
+     */
+    public $labels = '';
+
+    /**
+     * @var string
+     */
+    public $url = '';
 
     /**
      * Initializes the widget.
@@ -44,7 +59,7 @@ class MorrisJs extends Widget
     public function run()
     {
         echo Html::tag('div', '', ['id' => 'morrisjs-chart', 'class' => 'portlet-body-morris-fit morris-chart', 'style' => 'height: 260px; position: relative; -webkit-tap-highlight-color: rgba(0, 0, 0, 0);']);
-        echo $this->js;
+        $this->getView()->registerJs($this->js);
     }
 
     /**
@@ -52,29 +67,35 @@ class MorrisJs extends Widget
      */
     public function getJs()
     {
-        return "
-        <script type=\"text/javascript\">
-        new Morris.Area({
-            element: 'morrisjs-chart',
-            padding: 0,
-            behaveLikeLine: false,
-            gridEnabled: false,
-            gridLineColor: false,
-            axes: false,
-            fillOpacity: 1,
-            data: $this->data,
-            lineColors: ['#399a8c', '#92e9dc'],
-            hoverCallback: function(index, options, content) {
-                return(content);
-            },
-            xkey: 'period',
-            ykeys: ['worked'],
-            labels: ['Worked'],
-            pointSize: 0,
-            lineWidth: 0,
-            hideHover: 'auto',
-            resize: true,
+        return <<< JS
+        $(document).ready(function() {
+            $.ajax({
+                 url: '$this->url',
+                 type: 'GET',
+                 cache: false,
+                 success: function (response) {
+                     new Morris.Area({
+                         element: 'morrisjs-chart',
+                         padding: 0,
+                         behaveLikeLine: false,
+                         gridEnabled: false,
+                         gridLineColor: false,
+                         axes: false,
+                         fillOpacity: 1,
+                         data: response.data,
+                         lineColors: ['#399a8c', '#92e9dc'],
+                         xkey: $this->xkey,
+                         ykeys: $this->ykeys,
+                         labels: $this->labels,
+                         pointSize: 0,
+                         lineWidth: 0,
+                         hideHover: 'auto',
+                         resize: true,
+                         parseTime: false
+                     });
+                 }
+            });
         });
-        </script>";
+JS;
     }
 }
