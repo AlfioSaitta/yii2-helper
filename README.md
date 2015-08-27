@@ -277,3 +277,49 @@ public function actionGetMorrisJs($userId = null)
     ];
 }
 ```
+
+Date Paginator
+-----
+
+Add to your view file with:
+
+    use anli\helper\widgets\DatePaginator;
+    ...
+    <?php
+        $selectedDate = (0 < $dataProvider->totalCount) ? $dataProvider->getModels()[0]['timesheet_date'] : Yii::$app->getRequest()->getQueryParam('TimesheetSearch')['timesheet_date'];
+
+        echo DatePaginator::widget(['id' => 'timesheet-date-paginator', 'selectedDate' => $selectedDate,
+            'queryUrl' => Url::to(['/user/dashboard']) . '?TimesheetSearch%5Btimesheet_date%5D=',
+        ]);
+    ?>
+
+Change your controller with:
+
+```
+/**
+ * Logout a user with auth0
+ * @return mixed
+ */
+public function actionDashboard()
+{
+    Yii::$app->user->setReturnUrl(['/' . $this->getRoute()]);
+
+    $query = Timesheet::find()
+    ->byUser()
+    ->orderBy('timesheet_date DESC, start_time DESC');
+
+    if (null === (Yii::$app->getRequest()->getQueryParam('TimesheetSearch')['timesheet_date'])) {
+        $query->byTimesheetDate(strtotime(User::LoginUser()->getTimesheets()->max('timesheet_date')));
+    }
+
+    $searchModel = new TimesheetSearch();
+    $dataProvider = $searchModel->search(Yii::$app->request->queryParams, $query);
+
+    return $this->render('dashboard', [
+        'user' => User::LoginUser(),
+        'timesheetQuery' => $query,
+        'dataProvider' => $dataProvider,
+        'searchModel' => $searchModel,
+    ]);
+}
+```
