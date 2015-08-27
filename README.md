@@ -189,67 +189,6 @@ Add to your controller `actions` function with:
         'conditions' => ['tenant_id' => Yii::$app->tenant->identity->id, 'user_id' => Yii::$app->user->id],
     ],
 
-Calendar Heatmap
------
-
-Download the heatmap files from [here](https://github.com/kamisama/cal-heatmap/archive/master.zip) and unzip the contents to your `@web/cal-heatmap/`.
-
-Add to your view file with:
-
-    anli\helper\assets\CalHeatmapAsset::register($this);
-    ...
-    <div id="cal-heatmap" align="center"></div>
-    <script type="text/javascript">
-        now = new Date();
-        now.setMonth(now.getMonth() - 1);
-
-        var cal = new CalHeatMap();
-    	cal.init({
-        	domain: "month",
-        	subDomain: "x_day",
-            data: "http://localhost:8100/user/get-timesheet-heatmap-data",
-        	start: now,
-        	cellSize: 20,
-        	cellPadding: 5,
-        	domainGutter: 20,
-        	range: 2,
-        	domainDynamicDimension: false,
-        	//subDomainTextFormat: "%d",
-            highlight: "now",
-            tooltip: false,
-        	legend: [2, 4, 6, 8]
-        });
-    </script>
-
-Add to your controller file with:
-
-```
-/**
- * @param mixed $id
- * @return string
- */
-public function actionGetTimesheetHeatmapData($id = null)
-{
-    if (!isset($id)) {
-        $id = Yii::$app->user->id;
-    }
-
-    $query = $this->findModel($id)
-    ->getTimesheets()
-    ->select('timesheet_date, sum(work_hour) AS work_hour')
-    ->groupBy('timesheet_date');
-
-    $data = [];
-    foreach ($query->all() as $record) {
-        $date = new \DateTime($record->timesheet_date);
-        $data[$date->getTimestamp()] = (float)$record->work_hour;
-    }
-
-    Yii::$app->response->format = Response::FORMAT_JSON;
-    return $data;
-}
-```
-
 Cal Heatmap
 -----
 
@@ -257,35 +196,48 @@ Add your view file with:
 
     use anli\helper\widgets\CalHeatmap;
     ...
-    <?= CalHeatmap::widget(['url' => ['user/get-timesheet-heatmap-data']]); ?>
+    <?= CalHeatmap::widget(['url' => ['timesheet/get-timeslip-heatmap-data'], 'id' => 'timeslip-heatmap', 'legend' => '[1]', 'legendColors' => '["#efefef", "maroon"]', 'onClickUrl' => Url::to(['timesheet/list', 'userId' => Yii::$app->user->id])]); ?>
 
-Add your controller with:
+For the heatmap data add your controller with:
 
 ```
 /**
  * @param mixed $id
  * @return string
  */
-public function actionGetTimesheetHeatmapData($id = null)
+public function actionGetTimeslipHeatmapData($id = null)
 {
     if (!isset($id)) {
         $id = Yii::$app->user->id;
     }
 
-    $query = $this->findModel($id)
-    ->getTimesheets()
-    ->select('timesheet_date, sum(work_hour) AS work_hour')
-    ->groupBy('timesheet_date');
-
     $data = [];
-    foreach ($query->all() as $record) {
-        $date = new \DateTime($record->timesheet_date);
-        $data[$date->getTimestamp()] = (float)$record->work_hour;
+    foreach (User::findOne($id)->timeslips as $record) {
+        $date = new \DateTime($record['timesheet_date']);
+        $data[$date->getTimestamp()] = (float)1;
     }
 
     Yii::$app->response->format = Response::FORMAT_JSON;
     return $data;
 }
+```
+
+For the `onClickJs` event, add your controller with:
+
+```
+/**
+ * @param integer $userId
+ * @param integer $timesheetDate
+ * @return mixed
+ */
+ public function actionList($userId, $date)
+ {
+     return $this->renderAjax('list', [
+         'query' => Timesheet::find()
+            ->byUser($userId)
+            ->byTimesheetDate(strtotime($date))
+     ]);
+ }
 ```
 
 Morris Js

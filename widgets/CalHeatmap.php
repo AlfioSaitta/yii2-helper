@@ -24,6 +24,11 @@ use yii\bootstrap\BootstrapPluginAsset;
 class CalHeatmap extends Widget
 {
     /**
+     * @param string
+     */
+    public $id = 'cal-heatmap';
+
+    /**
      * @param mixed
      */
     public $url = '';
@@ -31,7 +36,17 @@ class CalHeatmap extends Widget
     /**
      * @param string
      */
-    public $legend = '[8,12,16,20]';
+    public $legend = '[1]';
+
+    /**
+     * @param string
+     */
+    public $legendColors = 'null';
+
+    /**
+     * @param string
+     */
+    public $onClickUrl = '';
 
     /**
      * Initializes the widget.
@@ -49,8 +64,8 @@ class CalHeatmap extends Widget
      */
     public function run()
     {
-        echo Html::tag('div', '', ['id' => 'cal-heatmap', 'align' => 'center']);
-        echo $this->js;
+        echo Html::tag('div', '', ['id' => $this->id, 'align' => 'center']);
+        $this->getView()->registerJs($this->js);
     }
 
     /**
@@ -58,43 +73,41 @@ class CalHeatmap extends Widget
      */
     public function getJs()
     {
-        $url = Url::to(['timesheet/list', 'userId' => Yii::$app->user->id]);
-
-        return "
-        <script type=\"text/javascript\">
+        return <<< JS
+        $(document).ready(function() {
             now = new Date();
             now.setMonth(now.getMonth() - 1);
 
             var cal = new CalHeatMap();
         	cal.init({
-            	domain: \"month\",
-            	subDomain: \"x_day\",
-                data: \"$this->url\",
+                itemSelector: "#$this->id",
+            	domain: "month",
+            	subDomain: "x_day",
+                data: "$this->url",
             	start: now,
             	cellSize: 20,
             	cellPadding: 5,
             	domainGutter: 20,
             	range: 2,
             	domainDynamicDimension: false,
-                highlight: \"now\",
+                highlight: "now",
                 tooltip: false,
             	legend: $this->legend,
                 onClick: function(date, value) {
                     $this->onClickJs;
             	},
+                legendColors: $this->legendColors,
             });
-        </script>";
+        });
+JS;
     }
 
     public function getOnClickJs()
     {
-        $url = Url::to(['timesheet/list', 'userId' => Yii::$app->user->id]);
-
-        return "
+        return <<< JS
             var myDate = new moment(date);
-            var url = \"$url\";
-            var url = url.concat(\"&timesheetDate=\", myDate.format(\"YYYY-MM-DD\"));
-            console.log(url);
+            var url = "$this->onClickUrl";
+            var url = url.concat("&date=", myDate.format("YYYY-MM-DD"));
 
             $('#modal').modal('show')
                     .find('#modalContent')
@@ -103,6 +116,6 @@ class CalHeatmap extends Widget
                 $('textarea:visible:first').focus();
                 $('input:visible:first').focus();
             })
-        ";
+JS;
     }
 }

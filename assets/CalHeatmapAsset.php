@@ -41,11 +41,6 @@ class CalHeatmapAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $jsOptions = ['position' => View::POS_HEAD];
-
-    /**
-     * @inheritdoc
-     */
     public $depends = [
     ];
 }
