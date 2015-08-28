@@ -12,21 +12,20 @@ use yii\web\AssetBundle;
 /**
  * This is the modal asset bundle.
  * @author Su Anli <anli@euqol.com>
- * @since 1.0.0
+ * @since 1.1.0
  */
-class ModalAsset extends AssetBundle
+class PjaxAsset extends AssetBundle
 {
     /**
      * @inheritdoc
      */
     public $sourcePath = '@vendor/anli/yii2-helper/';
-
+    
     /**
      * @inheritdoc
      */
     public $js = [
-        'js/modal-popup.js',
-        'js/modal-submit.js',
+        'js/pjax-init.js',
     ];
 
     /**

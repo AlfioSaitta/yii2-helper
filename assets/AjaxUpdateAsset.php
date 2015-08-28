@@ -10,11 +10,11 @@ namespace anli\helper\assets;
 use yii\web\AssetBundle;
 
 /**
- * This is the modal asset bundle.
+ * This is the ajax update asset bundle.
  * @author Su Anli <anli@euqol.com>
- * @since 1.0.0
+ * @since 1.2.0
  */
-class ModalAsset extends AssetBundle
+class AjaxUpdateAsset extends AssetBundle
 {
     /**
      * @inheritdoc
@@ -25,8 +25,7 @@ class ModalAsset extends AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'js/modal-popup.js',
-        'js/modal-submit.js',
+        'js/ajax-update.js',
     ];
 
     /**

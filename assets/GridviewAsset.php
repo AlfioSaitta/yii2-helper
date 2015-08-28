@@ -12,9 +12,9 @@ use yii\web\AssetBundle;
 /**
  * This is the modal asset bundle.
  * @author Su Anli <anli@euqol.com>
- * @since 1.0.0
+ * @since 1.1.0
  */
-class ModalAsset extends AssetBundle
+class GridviewAsset extends AssetBundle
 {
     /**
      * @inheritdoc
@@ -25,8 +25,7 @@ class ModalAsset extends AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'js/modal-popup.js',
-        'js/modal-submit.js',
+        'js/gridview-checkbox.js',
     ];
 
     /**

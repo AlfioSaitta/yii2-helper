@@ -10,11 +10,11 @@ namespace anli\helper\assets;
 use yii\web\AssetBundle;
 
 /**
- * This is the modal asset bundle.
+ * This is the select 2 asset bundle.
  * @author Su Anli <anli@euqol.com>
- * @since 1.0.0
+ * @since 1.1.0
  */
-class ModalAsset extends AssetBundle
+class Select2Asset extends AssetBundle
 {
     /**
      * @inheritdoc
@@ -24,10 +24,9 @@ class ModalAsset extends AssetBundle
     /**
      * @inheritdoc
      */
-    public $js = [
-        'js/modal-popup.js',
-        'js/modal-submit.js',
-    ];
+    public $css = [
+        'css/select2.css',
+    ];    
 
     /**
      * @inheritdoc

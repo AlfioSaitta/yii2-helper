@@ -8,13 +8,14 @@
 namespace anli\helper\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
- * This is the modal asset bundle.
+ * This is the ajax update asset bundle.
  * @author Su Anli <anli@euqol.com>
- * @since 1.0.0
+ * @since 1.2.0
  */
-class ModalAsset extends AssetBundle
+class CalHeatmapAsset extends AssetBundle
 {
     /**
      * @inheritdoc
@@ -24,16 +25,22 @@ class ModalAsset extends AssetBundle
     /**
      * @inheritdoc
      */
+    public $css = [
+        '//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.css',
+    ];
+
+    /**
+     * @inheritdoc
+     */
     public $js = [
-        'js/modal-popup.js',
-        'js/modal-submit.js',
+        '//cdnjs.cloudflare.com/ajax/libs/d3/3.5.6/d3.min.js',
+        '//cdn.jsdelivr.net/cal-heatmap/3.3.10/cal-heatmap.min.js',
+        '//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.6/moment.min.js',
     ];
 
     /**
      * @inheritdoc
      */
     public $depends = [
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }

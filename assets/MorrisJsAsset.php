@@ -8,25 +8,36 @@
 namespace anli\helper\assets;
 
 use yii\web\AssetBundle;
+use yii\web\View;
 
 /**
- * This is the modal asset bundle.
+ * This is the Morris Js asset bundle.
  * @author Su Anli <anli@euqol.com>
- * @since 1.0.0
+ * @since 1.2.0
  */
-class ModalAsset extends AssetBundle
+class MorrisJsAsset extends AssetBundle
 {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/anli/yii2-helper/';
+    public $sourcePath = null;
+
+    /**
+     * @inheritdoc
+     */
+    public $css = [
+        '//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css',
+
+    ];
 
     /**
      * @inheritdoc
      */
     public $js = [
-        'js/modal-popup.js',
-        'js/modal-submit.js',
+
+        '//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js',
+        '//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js',
+
     ];
 
     /**
