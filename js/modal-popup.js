@@ -16,6 +16,7 @@ $(function(){
         $('#modal').on('shown.bs.modal', function () {
             $('textarea:visible:first').focus();
             $('input:visible:first').focus();
+            $.find('.select2-input').focus();
         })
     });
 });

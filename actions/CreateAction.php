@@ -41,6 +41,19 @@ class CreateAction extends Action
     public $view = 'create';
 
     /**
+     * @var array
+     */
+    public $defaultValues = [];
+
+    public function init()
+    {
+        parent::init();
+        
+        $this->defaultValues = call_user_func($this->defaultValues);
+        $this->assignDefaultValues();
+    }
+
+    /**
      * Runs the action
      *
      * @return string result content
@@ -76,4 +89,16 @@ class CreateAction extends Action
             'model' => $model
         ]);
     }
+
+    /**
+	 * Assign default values to model.
+	 */
+	protected function assignDefaultValues()
+	{
+		foreach ($this->defaultValues as $key => $value) {
+			$this->model[$key] = $value;
+		}
+
+        return true;
+	}
 }

@@ -8,6 +8,7 @@
 namespace anli\helper\widgets;
 
 use anli\helper\assets\DatePaginatorAsset;
+use Closure;
 use Yii;
 use yii\helpers\ArrayHelper;
 use yii\helpers\Html;
@@ -68,14 +69,17 @@ class DatePaginator extends Widget
                 var options = {
                     selectedDate: "$this->selectedDate",
                     selectedDateFormat: 'YYYY-MM-DD',
+                    showCalendar: false,
                 }
                 $("#$this->id").datepaginator(options);
                 $("#$this->id").on('selectedDateChanged', function(event, date) {
                   var ctl = document.getElementById('date-paginator-pjax-button');
                   ctl.href = ctl.getAttribute('date-paginator-url') + date._i;
-                  ctl.click();                  
+                  ctl.click();
                 });
             });
 JS;
     }
+
+    
 }
