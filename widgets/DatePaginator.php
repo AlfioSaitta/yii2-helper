@@ -70,6 +70,7 @@ class DatePaginator extends Widget
                     selectedDate: "$this->selectedDate",
                     selectedDateFormat: 'YYYY-MM-DD',
                     showCalendar: false,
+                    endDate: moment(),
                 }
                 $("#$this->id").datepaginator(options);
                 $("#$this->id").on('selectedDateChanged', function(event, date) {
@@ -81,5 +82,5 @@ class DatePaginator extends Widget
 JS;
     }
 
-    
+
 }
