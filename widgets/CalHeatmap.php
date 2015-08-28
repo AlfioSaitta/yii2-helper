@@ -81,6 +81,10 @@ class CalHeatmap extends Widget
             var cal = new CalHeatMap();
         	cal.init({
                 itemSelector: "#$this->id",
+                itemName: ["hour", "hours"],
+                subDomainTextFormat: function(date) {
+            		return moment(date).format("dd"); // Use the moment library to format the Date
+            	},
             	domain: "month",
             	subDomain: "x_day",
                 data: "$this->url",
