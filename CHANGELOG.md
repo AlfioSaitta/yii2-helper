@@ -1,6 +1,11 @@
 CHANGELOG
 =====
 
+1.2.1 [28 Aug 2015]
+-----
+
+* `bug` Fixed bug to include kartik composer package
+
 1.2.0 [28 Aug 2015]
 -----
 

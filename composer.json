@@ -12,7 +12,11 @@
     ],
     "require": {
         "yiisoft/yii2": "*",
-        "phpoffice/phpexcel": "dev-master"        
+        "phpoffice/phpexcel": "dev-master",
+        "kartik-v/yii2-widgets": "*",
+        "kartik-v/yii2-datecontrol": "dev-master",
+        "kartik-v/yii2-grid": "@dev",
+        "kartik-v/yii2-date-range": "*"
     },
     "autoload": {
         "psr-4": {
