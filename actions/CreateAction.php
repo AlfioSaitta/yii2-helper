@@ -45,10 +45,23 @@ class CreateAction extends Action
      */
     public $defaultValues = [];
 
+    /**
+     * @var boolean
+     */
+    public $isSaveAndNew = false;
+
+    /**
+     * @var string
+     */
+    public $saveAndNewUrl = '';
+
+    /**
+     * @inheritdoc
+     */
     public function init()
     {
         parent::init();
-        
+
         $this->defaultValues = call_user_func($this->defaultValues);
         $this->assignDefaultValues();
     }
@@ -63,7 +76,16 @@ class CreateAction extends Action
         $model = $this->model;
 
         if ($model->load(Yii::$app->request->post())) {
+
             if ($model->save()) {
+
+                if ($this->isSaveAndNew) {
+                    Yii::$app->response->format = Response::FORMAT_JSON;
+                    return [
+                        'message' => 'saveAndNew',
+                        'saveAndNewUrl' => $this->saveAndNewUrl,
+                    ];
+                }
 
                 Yii::$app->getSession()->setFlash('success', $this->successMsg);
                 Yii::$app->response->format = Response::FORMAT_JSON;
@@ -92,6 +114,7 @@ class CreateAction extends Action
 
     /**
 	 * Assign default values to model.
+     * @return boolean
 	 */
 	protected function assignDefaultValues()
 	{

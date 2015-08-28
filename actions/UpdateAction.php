@@ -41,6 +41,24 @@ class UpdateAction extends Action
     public $view = 'update';
 
     /**
+     * @var boolean
+     */
+    public $isSaveAndNew = false;
+
+    /**
+     * @var string
+     */
+    public $saveAndNewUrl = '';
+
+    /**
+     * @inheritdoc
+     */
+    public function init()
+    {
+        parent::init();
+    }
+
+    /**
      * Runs the action
      *
      * @return string result content
@@ -52,6 +70,14 @@ class UpdateAction extends Action
 
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
+
+                if ($this->isSaveAndNew) {
+                    Yii::$app->response->format = Response::FORMAT_JSON;
+                    return [
+                        'message' => 'saveAndNew',
+                        'saveAndNewUrl' => $this->saveAndNewUrl,
+                    ];
+                }
 
                 Yii::$app->getSession()->setFlash('success', $this->successMsg);
                 Yii::$app->response->format = Response::FORMAT_JSON;

@@ -4,21 +4,33 @@ $('body').on('beforeSubmit', 'form.modalSubmit', function () {
      if (form.find('.has-error').length) {
           return false;
      }
+
      // submit form
      $.ajax({
           url: form.attr('action'),
           type: 'post',
           data: form.serialize(),
           success: function (response) {
-              $('#modal').modal('hide');
-              
-              if ($('#message-pjax').length) {
-                  $.pjax.reload({container: "#message-pjax", async:false});
-              }
+            if ('success' == response.message) {
+                $('#modal').modal('hide');
 
-              if ($('#container-pjax').length) {
+                if ($('#message-pjax').length) {
+                  $.pjax.reload({container: "#message-pjax", async:false});
+                }
+
+                if ($('#container-pjax').length) {
                   $.pjax.reload({container: "#container-pjax", async:false});
-              }
+                }
+
+                return true;
+            }
+
+            if ('saveAndNew' == response.message) {
+                $('#modal')
+                        .find('#modalContent')
+                        .load(response.saveAndNewUrl);
+                return true;
+            }
           }
      });
      return false;

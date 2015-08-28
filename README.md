@@ -329,19 +329,36 @@ Create Action
 
 Add to the `action` section of your controller with:
 
-    'copy' => [
-        'class' => 'anli\helper\actions\CreateAction',
-        'model' => new Timesheet,
-        'defaultValues' => function () {
-            $model = Timesheet::findOne(Yii::$app->getRequest()->getQueryParam('id'));
-            return [
-                'timesheet_date' => date('Y-m-d'),
-                'start_time' => Timesheet::find()->byUser()->byTimesheetDate('now')->max('end_time'),
-                'customer_id' => $model->customer_id,
-                'is_chargeable' => $model->is_chargeable,
-                'period_start_date' => $model->period_start_date,
-                'period_end_date' => $model->period_end_date,
-                'name' => $model->name,
-            ];
-        }
-    ],
+```
+'copy' => [
+    'class' => 'anli\helper\actions\CreateAction',
+    'model' => new Timesheet,
+    'defaultValues' => function () {
+        $model = Timesheet::findOne(Yii::$app->getRequest()->getQueryParam('id'));
+        return [
+            'timesheet_date' => date('Y-m-d'),
+            'start_time' => Timesheet::find()->byUser()->byTimesheetDate('now')->max('end_time'),
+            'customer_id' => $model->customer_id,
+            'is_chargeable' => $model->is_chargeable,
+            'period_start_date' => $model->period_start_date,
+            'period_end_date' => $model->period_end_date,
+            'name' => $model->name,
+        ];
+    }
+    'isSaveAndNew' => (isset($_POST['save-and-new'])),
+    'saveAndNewUrl' => Url::to(['timesheet/create']),
+],
+```
+
+Update Action
+-----
+
+Add to the `action` section of your controller with:
+```
+'update' => [
+    'class' => 'anli\helper\actions\UpdateAction',
+    'model' => Timesheet::findOne(Yii::$app->getRequest()->getQueryParam('id')),
+    'isSaveAndNew' => (isset($_POST['save-and-new'])),
+    'saveAndNewUrl' => Url::to(['timesheet/create']),
+],
+```
