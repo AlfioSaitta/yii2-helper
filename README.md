@@ -180,14 +180,13 @@ Delete All Action
 
 Add to your controller `actions` function with:
 
-    use anli\helper\actions\DeleteAll;
     ...
     return [
         'delete-all' => [
-        'class' => 'sual0001\helper\actions\DeleteAllAction'
-        'modelFullName' => self::MODEL_FULL_NAME(),
-        'conditions' => ['tenant_id' => Yii::$app->tenant->identity->id, 'user_id' => Yii::$app->user->id],
-    ],
+            'class' => 'anli\helper\actions\DeleteAllAction',
+            'modelFullName' => self::MODEL_FULL_NAME,
+            'conditions' => ['tenant_id' => Yii::$app->tenant->identity->id, 'user_id' => Yii::$app->user->id],
+        ],
 
 Cal Heatmap
 -----
