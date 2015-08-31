@@ -1,6 +1,11 @@
 CHANGELOG
 =====
 
+1.2.2 [31 Aug 2015]
+-----
+
+* `bug` Fixed bug by renaming GridViewAsset correctly
+
 1.2.1 [28 Aug 2015]
 -----
 
