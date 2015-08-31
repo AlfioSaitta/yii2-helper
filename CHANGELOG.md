@@ -1,6 +1,11 @@
 CHANGELOG
 =====
 
+1.2.3 [31 Aug 2015]
+-----
+
+* `bug` Fixed bug to allow defaultValue in CreateAction to be empty
+
 1.2.2 [31 Aug 2015]
 -----
 
