@@ -62,8 +62,11 @@ class CreateAction extends Action
     {
         parent::init();
 
-        $this->defaultValues = call_user_func($this->defaultValues);
-        $this->assignDefaultValues();
+        if (!empty($this->defaultValues)) {
+            $this->defaultValues = call_user_func($this->defaultValues);
+            $this->assignDefaultValues();
+        }
+
     }
 
     /**
