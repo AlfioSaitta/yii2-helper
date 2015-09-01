@@ -209,7 +209,9 @@ class ImportAction extends Action
         if (isset($attribute['model']) && (isset($cellValue))) {
 
             if (isset($attribute['isApiModel']) && $attribute['isApiModel']) {
-                return $attribute['model']::findOne([$attribute['matchField'] => $cellValue])
+                //return $attribute['model']::findOne([$attribute['matchField'] => $cellValue])
+                //return $attribute['model']::findOne(['name' => 'Initech'])
+                return $attribute['model']::findOne(4)
                 ->id;
             }
 
