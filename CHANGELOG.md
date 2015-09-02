@@ -1,6 +1,11 @@
 CHANGELOG
 =====
 
+1.3.1 [2 Sep 2015]
+-----
+
+* `bug` Fixed bug in import action
+
 1.3.0 [1 Sep 2015]
 -----
 
