@@ -1,6 +1,12 @@
 CHANGELOG
 =====
 
+1.3.0 [1 Sep 2015]
+-----
+
+* `enh` Added gif loading on ajax popup
+* `enh` Added import for api model to ImportAction
+
 1.2.3 [31 Aug 2015]
 -----
 
