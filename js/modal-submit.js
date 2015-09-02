@@ -11,7 +11,6 @@ $('body').on('beforeSubmit', 'form.modalSubmit', function () {
           type: 'post',
           data: form.serialize(),
           success: function (response) {
-            alert('after');
             if ('success' == response.message) {
                 $('#modal').modal('hide');
 
