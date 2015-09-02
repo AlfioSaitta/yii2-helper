@@ -10,6 +10,8 @@ $(function(){
         //the if else are intentionally separated instead of put into a function to get the
         //button since it is using a class not an #id so there are many of them and we need
         //to ensure we get the right button and content.
+        $('#modal').find('#modalContent')
+            .html("<div style='text-align: center;'><img src='/images/ajax-loader.gif' /></div>");
         $('#modal').modal('show')
                 .find('#modalContent')
                 .load($(this).attr('value'));
