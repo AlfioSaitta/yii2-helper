@@ -1,0 +1,7 @@
+.select2-dropdown.select2-dropdown--above {
+    z-index: 10053 !important;
+}
+
+.select2-dropdown.select2-dropdown--below {
+    z-index: 10053 !important;
+}
