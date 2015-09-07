@@ -32,6 +32,13 @@ class ModalAsset extends AssetBundle
     /**
      * @inheritdoc
      */
+    public $css = [
+        'css/autocomplete.css',
+    ];
+
+    /**
+     * @inheritdoc
+     */
     public $depends = [
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
