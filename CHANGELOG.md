@@ -1,6 +1,12 @@
 CHANGELOG
 =====
 
+1.4.0 [7 Sep 2015]
+-----
+
+* `enh` Added autocomplete widget CSS to ModalAsset
+
+
 1.3.1 [2 Sep 2015]
 -----
 
