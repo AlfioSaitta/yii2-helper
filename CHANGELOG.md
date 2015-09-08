@@ -1,6 +1,11 @@
 CHANGELOG
 =====
 
+1.4.0 [8 Sep 2015]
+-----
+
+* `enh` Added mpdf
+
 1.4.0 [7 Sep 2015]
 -----
 
