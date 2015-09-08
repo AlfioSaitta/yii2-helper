@@ -56,6 +56,11 @@ class CreateAction extends Action
     public $saveAndNewUrl = '';
 
     /**
+     * @var string
+     */
+    public $redirectToViewUrl = null;
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -88,6 +93,10 @@ class CreateAction extends Action
                         'message' => 'saveAndNew',
                         'saveAndNewUrl' => $this->saveAndNewUrl,
                     ];
+                }
+
+                if (isset($this->redirectToViewUrl)) {
+                    return $this->controller->redirect([$this->redirectToViewUrl, 'id' => $model->id]);
                 }
 
                 Yii::$app->getSession()->setFlash('success', $this->successMsg);

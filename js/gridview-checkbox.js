@@ -11,17 +11,29 @@ $(function(){
         //button since it is using a class not an #id so there are many of them and we need
         //to ensure we get the right button and content.
 
-        var keys = $('#' + $(this).attr('value-id')).yiiGridView('getSelectedRows').toString();
+        var keys = $('#' + $(this).attr('data-id')).yiiGridView('getSelectedRows').toString();
         //console.log(keys);
 
         $.ajax({
-             url: $(this).attr('value-url'),
+             url: $(this).attr('data-url'),
              type: 'GET',
              cache    : false,
-             data     : {keylist: keys},
+             data     : {keylist: keys, param: $(this).attr('data-param')},
              dataType: 'json',
              success: function (response) {
                  console.log(response.message);
+
+                 if ('closeModal' == response.nextAction) {
+                     $('#modal').modal('hide');
+
+                     if ($('#message-pjax').length) {
+                       $.pjax.reload({container: "#message-pjax", async:false});
+                     }
+
+                     if ($('#container-pjax').length) {
+                       $.pjax.reload({container: "#container-pjax", async:false});
+                     }
+                 }
              }
         });
 
