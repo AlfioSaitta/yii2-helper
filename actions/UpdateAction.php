@@ -68,6 +68,11 @@ class UpdateAction extends Action
 
         $model = $this->model;
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && isset($_POST['ajax'])) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return \yii\widgets\ActiveForm::validate($model);
+        }
+
         if ($model->load(Yii::$app->request->post())) {
             if ($model->save()) {
 
@@ -92,11 +97,6 @@ class UpdateAction extends Action
                 'message' => 'error',
                 'error' => print_r($model->getErrors()),
             ];
-        }
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && isset($_POST['ajax'])) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return \yii\widgets\ActiveForm::validate($model);
         }
 
         return $this->controller->renderAjax($this->view, [
