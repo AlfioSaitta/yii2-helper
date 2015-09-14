@@ -33,12 +33,18 @@ class Gravatar extends model
     /**
      * @return string
      */
+    public $default;
+
+    /**
+     * @return string
+     */
     public function getImageUrl()
     {
         if (isset($this->email)) {
             return self::URL_PREFIX
                 . $this->hash
-                . $this->sizeParam;
+                . $this->sizeParam
+                . $this->defaultParam;
         }
 
         return '';
@@ -58,5 +64,17 @@ class Gravatar extends model
     protected function getSizeParam()
     {
         return "?s={$this->size}";
+    }
+
+    /**
+     * @return string
+     */
+    protected function getDefaultParam()
+    {
+        if (isset($this->default)) {
+            return '&d=' . urlencode($this->default);
+        }
+
+        return '';
     }
 }
