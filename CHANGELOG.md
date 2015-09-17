@@ -1,6 +1,15 @@
 CHANGELOG
 =====
 
+1.6.0 [17 Sep 2015]
+-----
+
+* `enh` Added gridview checkbox js feature
+* `enh` Added ajax js feature
+* `enh` Added default param to gravatar helper
+* `enh` Added envelope API
+* `bug` Fixed bug for ajax validation in action create and update
+
 1.5.0 [8 Sep 2015]
 -----
 
