@@ -56,6 +56,11 @@ class CreateAction extends Action
     public $saveAndNewUrl = '';
 
     /**
+     * @var string
+     */
+    public $redirectToViewUrl = null;
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -78,6 +83,11 @@ class CreateAction extends Action
     {
         $model = $this->model;
 
+        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && isset($_POST['ajax'])) {
+            Yii::$app->response->format = Response::FORMAT_JSON;
+            return ActiveForm::validate($model);
+        }
+        
         if ($model->load(Yii::$app->request->post())) {
 
             if ($model->save()) {
@@ -88,6 +98,10 @@ class CreateAction extends Action
                         'message' => 'saveAndNew',
                         'saveAndNewUrl' => $this->saveAndNewUrl,
                     ];
+                }
+
+                if (isset($this->redirectToViewUrl)) {
+                    return $this->controller->redirect([$this->redirectToViewUrl, 'id' => $model->id]);
                 }
 
                 Yii::$app->getSession()->setFlash('success', $this->successMsg);
@@ -103,11 +117,6 @@ class CreateAction extends Action
                 'message' => 'error',
                 'error' => print_r($model->getErrors()),
             ];
-        }
-
-        if (Yii::$app->request->isAjax && $model->load(Yii::$app->request->post()) && isset($_POST['ajax'])) {
-            Yii::$app->response->format = Response::FORMAT_JSON;
-            return ActiveForm::validate($model);
         }
 
         return $this->controller->renderAjax($this->view, [

@@ -1,6 +1,37 @@
 CHANGELOG
 =====
 
+1.6.0 [17 Sep 2015]
+-----
+
+* `enh` Added gridview checkbox js feature
+* `enh` Added ajax js feature
+* `enh` Added default param to gravatar helper
+* `enh` Added envelope API
+* `bug` Fixed bug for ajax validation in action create and update
+
+1.5.0 [8 Sep 2015]
+-----
+
+* `enh` Added mpdf
+
+1.4.0 [7 Sep 2015]
+-----
+
+* `enh` Added autocomplete widget CSS to ModalAsset
+
+
+1.3.1 [2 Sep 2015]
+-----
+
+* `bug` Fixed bug in import action
+
+1.3.0 [1 Sep 2015]
+-----
+
+* `enh` Added gif loading on ajax popup
+* `enh` Added import for api model to ImportAction
+
 1.2.3 [31 Aug 2015]
 -----
 
