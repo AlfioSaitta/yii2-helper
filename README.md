@@ -22,8 +22,6 @@ or add
 to the require section of your `composer.json` file.
 
 
-Copy the contents of the `js` folder to the `@web/js/` folder.
-
 Modal
 -----
 

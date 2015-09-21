@@ -4,10 +4,15 @@ body {font-family: "Franklin Gothic Medium", "Franklin Gothic", "ITC Franklin Go
 }
 p {    margin: 0pt;
 }
-td { vertical-align: top; }
+td {
+    vertical-align: top;
+}
 .items td {
     border-left: 0.1mm solid #000000;
     border-right: 0.1mm solid #000000;
+}
+.items td.fixed-height {
+    height: 10mm;
 }
 table thead td { background-color: #EEEEEE;
     text-align: center;
@@ -22,4 +27,10 @@ table thead td { background-color: #EEEEEE;
 .items td.totals {
     text-align: right;
     border: 0.1mm solid #000000;
+}
+.items td.blankrow {
+    background-color: #FFFFFF;
+    border: 0mm none #000000;
+    border-top: 0.1mm solid #000000;
+    height: 0mm;
 }
