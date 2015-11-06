@@ -21,6 +21,11 @@ use yii\web\Response;
 class UpdateAction extends Action
 {
     /**
+     * @var array
+     */
+    public $params = [];
+
+    /**
      * @var mixed
      */
     public $model;
@@ -99,8 +104,8 @@ class UpdateAction extends Action
             ];
         }
 
-        return $this->controller->renderAjax($this->view, [
-            'model' => $model
-        ]);
+        return $this->controller->renderAjax($this->view, array_merge([
+            'model' => $model,
+        ], $this->params));
     }
 }

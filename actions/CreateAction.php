@@ -21,6 +21,11 @@ use yii\web\Response;
 class CreateAction extends Action
 {
     /**
+     * @var array
+     */
+    public $params = [];
+
+    /**
      * @var mixed
      */
     public $model;
@@ -87,7 +92,7 @@ class CreateAction extends Action
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
-        
+
         if ($model->load(Yii::$app->request->post())) {
 
             if ($model->save()) {
@@ -119,9 +124,9 @@ class CreateAction extends Action
             ];
         }
 
-        return $this->controller->renderAjax($this->view, [
-            'model' => $model
-        ]);
+        return $this->controller->renderAjax($this->view, array_merge([
+            'model' => $model,
+        ], $this->params));
     }
 
     /**
