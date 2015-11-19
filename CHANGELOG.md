@@ -1,6 +1,14 @@
 CHANGELOG
 =====
 
+1.7.0 [19 Sep 2015]
+-----
+
+* `chg` Changed crud and import action
+* `enh` Added params to create and update action
+* `chg` Changed mpdf css
+
+
 1.6.0 [17 Sep 2015]
 -----
 
