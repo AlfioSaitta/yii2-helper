@@ -21,6 +21,11 @@ use yii\web\Response;
 class CreateAction extends Action
 {
     /**
+     * @var array
+     */
+    public $params = [];
+
+    /**
      * @var mixed
      */
     public $model;
@@ -87,7 +92,7 @@ class CreateAction extends Action
             Yii::$app->response->format = Response::FORMAT_JSON;
             return ActiveForm::validate($model);
         }
-        
+
         if ($model->load(Yii::$app->request->post())) {
 
             if ($model->save()) {
@@ -96,6 +101,7 @@ class CreateAction extends Action
                     Yii::$app->response->format = Response::FORMAT_JSON;
                     return [
                         'message' => 'saveAndNew',
+                        'success' => true,
                         'saveAndNewUrl' => $this->saveAndNewUrl,
                     ];
                 }
@@ -104,24 +110,26 @@ class CreateAction extends Action
                     return $this->controller->redirect([$this->redirectToViewUrl, 'id' => $model->id]);
                 }
 
-                Yii::$app->getSession()->setFlash('success', $this->successMsg);
+                //Yii::$app->getSession()->setFlash('success', $this->successMsg);
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return [
                     'message' => 'success',
+                    'success' => true,
                 ];
             }
 
-            Yii::$app->getSession()->setFlash('error', $this->errorMsg);
+            //Yii::$app->getSession()->setFlash('error', $this->errorMsg);
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
                 'message' => 'error',
+                'success' => false,
                 'error' => print_r($model->getErrors()),
             ];
         }
 
-        return $this->controller->renderAjax($this->view, [
-            'model' => $model
-        ]);
+        return $this->controller->renderAjax($this->view, array_merge([
+            'model' => $model,
+        ], $this->params));
     }
 
     /**

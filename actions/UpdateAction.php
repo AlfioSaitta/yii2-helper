@@ -11,6 +11,7 @@ use Yii;
 use yii\base\Action;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
+use yii\helpers\Json;
 
 /**
  * This is the update action class.
@@ -20,6 +21,11 @@ use yii\web\Response;
  */
 class UpdateAction extends Action
 {
+    /**
+     * @var array
+     */
+    public $params = [];
+
     /**
      * @var mixed
      */
@@ -84,23 +90,25 @@ class UpdateAction extends Action
                     ];
                 }
 
-                Yii::$app->getSession()->setFlash('success', $this->successMsg);
+                //Yii::$app->getSession()->setFlash('success', $this->successMsg);
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return [
                     'message' => 'success',
+                    'success' => true,
                 ];
             }
 
-            Yii::$app->getSession()->setFlash('error', $this->errorMsg);
+            //Yii::$app->getSession()->setFlash('error', $this->errorMsg);
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
                 'message' => 'error',
-                'error' => print_r($model->getErrors()),
+                'success' => false,
+                'error' => Json::encode($model->getErrors()),
             ];
         }
 
-        return $this->controller->renderAjax($this->view, [
-            'model' => $model
-        ]);
+        return $this->controller->renderAjax($this->view, array_merge([
+            'model' => $model,
+        ], $this->params));
     }
 }
