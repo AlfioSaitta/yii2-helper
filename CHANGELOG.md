@@ -1,6 +1,11 @@
 CHANGELOG
 =====
 
+1.8.0 [08 Dec 2015]
+-----
+
+* `chg` Changed tooltip to trigger after pjax success
+
 1.7.0 [19 Sep 2015]
 -----
 
