@@ -1,6 +1,11 @@
 CHANGELOG
 =====
 
+1.9.0 [10 Dec 2015]
+-----
+
+* `enh` Added flash message to create and update action
+
 1.8.0 [08 Dec 2015]
 -----
 
@@ -12,7 +17,6 @@ CHANGELOG
 * `chg` Changed crud and import action
 * `enh` Added params to create and update action
 * `chg` Changed mpdf css
-
 
 1.6.0 [17 Sep 2015]
 -----
