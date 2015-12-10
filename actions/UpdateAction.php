@@ -90,7 +90,7 @@ class UpdateAction extends Action
                     ];
                 }
 
-                //Yii::$app->getSession()->setFlash('success', $this->successMsg);
+                Yii::$app->getSession()->setFlash('success', $this->successMsg);
                 Yii::$app->response->format = Response::FORMAT_JSON;
                 return [
                     'message' => 'success',
@@ -98,7 +98,7 @@ class UpdateAction extends Action
                 ];
             }
 
-            //Yii::$app->getSession()->setFlash('error', $this->errorMsg);
+            Yii::$app->getSession()->setFlash('error', $this->errorMsg);
             Yii::$app->response->format = Response::FORMAT_JSON;
             return [
                 'message' => 'error',
