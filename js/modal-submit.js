@@ -1,37 +1,39 @@
-$('body').on('beforeSubmit', 'form.modalSubmit', function () {
-     var form = $(this);
-     // return false if form still have some validation errors
-     if (form.find('.has-error').length) {
-          return false;
-     }
+/*
+ * This javascript have to be added to the _form view via include
+ * instead of assets bundle as a workaround to pjax issue
+ */
+$("form.modalSubmit").on('beforeSubmit.yii', function(e) {
 
-     // submit form
-     $.ajax({
-          url: form.attr('action'),
-          type: 'post',
-          data: form.serialize(),
-          success: function (response) {
-            if ('success' == response.message) {
+    var pjaxId = '#' + $(this).attr("pjax-id");
+
+    $.post($(this).attr("action"), $(this).serialize())
+        .done(function(result) {
+            if (result.success) {
                 $('#modal').modal('hide');
+                $.pjax.reload({container: pjaxId, async:false});
+                pjaxReloadMessage();
 
-                if ($('#message-pjax').length) {
-                  $.pjax.reload({container: "#message-pjax", async:false});
+            } else {
+                var $errors = JSON.parse(result.error);
+
+                var $message = '';
+                for(var i in $errors) {
+                    $message += $errors[i][0];
                 }
 
-                if ($('#container-pjax').length) {
-                  $.pjax.reload({container: "#container-pjax", async:false});
-                }
-
-                return true;
-            }
-
-            if ('saveAndNew' == response.message) {
-                $('#modal')
-                        .find('#modalContent')
-                        .load(response.saveAndNewUrl);
-                return true;
-            }
-          }
-     });
-     return false;
+                alert($message);
+            };
+        })
+        .fail(function(result) {
+            swal('Error', 'Validation Error or possible duplicate entry ', 'error');
+        }
+    );
+    return false;
 });
+
+function pjaxReloadMessage() {
+    var id = "#pjax-message";
+    if ($(id).length !== 0){
+        $.pjax.reload({container: id, async:false});
+    };
+}
