@@ -7,6 +7,7 @@
 
 namespace anli\helper\grid;
 
+use anli\helper\assets\AjaxDeleteAsset;
 use Yii;
 use yii\grid\ActionColumn;
 use yii\helpers\Html;
@@ -59,6 +60,8 @@ class Column
                         );
                     },
                     'ajax-delete' => function ($url, $model) {
+                        AjaxDeleteAsset::register(Yii::$app->controller->view);
+
                         return  Html::a('<span  class="glyphicon glyphicon-trash"></span>', false, [
                             'class' => 'ajaxDelete',
                             'delete-url' => Url::to(["$this->controller/ajax-delete", 'id' => $model->id]),

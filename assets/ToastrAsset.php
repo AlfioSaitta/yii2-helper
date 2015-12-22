@@ -10,35 +10,35 @@ namespace anli\helper\assets;
 use yii\web\AssetBundle;
 
 /**
- * This is the ajax delete asset bundle.
+ * This is the toastr asset bundle.
  * @author Su Anli <anli@euqol.com>
  * @since 2.0.0
  */
-class AjaxDeleteAsset extends AssetBundle
+class ToastrAsset extends AssetBundle
 {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/anli/yii2-helper/';
+    public $sourcePath = '@bower/toastr/';
 
     /**
      * @inheritdoc
      */
     public $css = [
+        'toastr.min.css',
     ];
 
     /**
      * @inheritdoc
      */
     public $js = [
-        'js/ajax-delete.js',
+        'toastr.min.js',
     ];
 
     /**
      * @inheritdoc
      */
     public $depends = [
-        'anli\helper\assets\SweetAlertAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];

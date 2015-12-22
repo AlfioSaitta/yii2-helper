@@ -359,3 +359,14 @@ Add to the `action` section of your controller with:
     'saveAndNewUrl' => Url::to(['timesheet/create']),
 ],
 ```
+
+Toastr
+-----
+
+Add to your layout:
+
+```
+<?php Pjax::begin(['id' => 'pjax-message']); ?>
+<?php anli\helper\widgets\Toastr::widget(); ?>
+<?php Pjax::end(); ?>
+```
