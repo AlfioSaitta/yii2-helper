@@ -36,6 +36,7 @@ class ModalForm extends Widget
         }
 
         $this->getView()->registerJs(file_get_contents(Yii::getAlias('@vendor/anli/yii2-helper/js/modal-submit.js')));
+        $this->getView()->registerCss(file_get_contents(Yii::getAlias('@vendor/anli/yii2-helper/css/select2.css')));
     }
 
     /**

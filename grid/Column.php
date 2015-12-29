@@ -55,7 +55,8 @@ class Column
                                 'value' => Url::to(["$this->controller/ajax-update", 'id' => $model->id, 'pjaxId' => 'list-pjax']),
                                 'data-toggle' => 'tooltip',
                                 'title' => 'Update',
-                                'class' => 'showModalButton'
+                                'class' => 'showModalButton',
+                                'name' => "update-$this->controller-button",
                             ]
                         );
                     },
@@ -66,6 +67,7 @@ class Column
                             'class' => 'ajaxDelete',
                             'delete-url' => Url::to(["$this->controller/ajax-delete", 'id' => $model->id]),
                             'pjax-container' => 'list-pjax',
+                            'name' => "delete-$this->controller-button",
                         ]);
                     },
                 ],

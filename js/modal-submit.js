@@ -25,6 +25,7 @@ $("form.modalSubmit").on('beforeSubmit.yii', function(e) {
             };
         })
         .fail(function(result) {
+            console.log(result.responseText);
             swal('Error', 'Validation Error or possible duplicate entry ', 'error');
         }
     );
