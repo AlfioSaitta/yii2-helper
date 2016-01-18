@@ -32,6 +32,7 @@ class AjaxUpdateAsset extends AssetBundle
      * @inheritdoc
      */
     public $depends = [
+        'anli\helper\assets\SweetAlertAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];

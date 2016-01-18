@@ -70,6 +70,18 @@ class Column
                             'name' => "delete-$this->controller-button",
                         ]);
                     },
+                    'ajax-copy' => function ($url, $model) {
+                        return Html::a(Html::tag('i', '', ['class' => 'glyphicon glyphicon-copy']),
+                            false,
+                            [
+                                'value' => Url::to(["$this->controller/ajax-copy", 'id' => $model->id, 'pjaxId' => 'list-pjax']),
+                                'data-toggle' => 'tooltip',
+                                'title' => 'Copy',
+                                'class' => 'showModalButton',
+                                'name' => "copy-$this->controller-button",
+                            ]
+                        );
+                    },
                 ],
                 'contentOptions' => ['class' => 'text-right'],
             ]
