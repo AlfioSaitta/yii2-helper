@@ -11,6 +11,7 @@ use Yii;
 use yii\base\Action;
 use yii\widgets\ActiveForm;
 use yii\web\Response;
+use yii\helpers\Url;
 
 /**
  * This is the list action class.
@@ -55,6 +56,7 @@ class ListAction extends Action
      */
     public function run()
     {
+        Url::remember();
         $dataProvider = $this->searchModel->singleSearch(Yii::$app->request->queryParams, $this->query);
 
         return $this->controller->render($this->view, array_merge([
