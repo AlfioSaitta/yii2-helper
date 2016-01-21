@@ -3,7 +3,7 @@
  * instead of assets bundle as a workaround to pjax issue
  */
 $("form.modalSubmit").on('beforeSubmit.yii', function(e) {
-
+    var modalId;
     var pjaxId = '#' + $(this).attr("pjax-id");
 
     $.post($(this).attr("action"), $(this).serialize())

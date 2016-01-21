@@ -72,11 +72,11 @@ class DeleteAllAction extends Action
 
 
         if ($model::deleteAll($this->conditions)) {
-            //Yii::$app->getSession()->setFlash('success', 'You have deleted all selected records!');
+            Yii::$app->getSession()->setFlash('success', 'You have deleted all selected records!');
             return $this->controller->goBack();
         }
 
-        //Yii::$app->getSession()->setFlash('error', 'You have failed to deleted all selected records!');
+        Yii::$app->getSession()->setFlash('error', 'You have failed to deleted all selected records!');
 		return $this->controller->goBack();
     }
 }

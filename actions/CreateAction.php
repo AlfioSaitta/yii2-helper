@@ -71,6 +71,11 @@ class CreateAction extends Action
     public $gridviewCheckboxOptions = [];
 
     /**
+     * @var mixed
+     */
+    public $textField = 'id';
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -99,6 +104,7 @@ class CreateAction extends Action
         }
 
         if ($model->load(Yii::$app->request->post())) {
+            $textField = $this->textField;
 
             if ($model->save()) {
 
@@ -112,6 +118,8 @@ class CreateAction extends Action
                         'message' => 'saveAndNew',
                         'success' => true,
                         'saveAndNewUrl' => $this->saveAndNewUrl,
+                        'id' => $model->id,
+                        'text' => $model->$textField,
                     ];
                 }
 
@@ -124,6 +132,8 @@ class CreateAction extends Action
                 return [
                     'message' => 'success',
                     'success' => true,
+                    'id' => $model->id,
+                    'text' => $model->$textField,
                 ];
             }
 
