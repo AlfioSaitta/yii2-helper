@@ -10,11 +10,11 @@ namespace anli\helper\assets;
 use yii\web\AssetBundle;
 
 /**
- * This is the show modal button asset bundle.
+ * This is the modal button asset bundle.
  * @author Su Anli <anli@euqol.com>
  * @since 2.0.0
  */
-class ShowModalButtonAsset extends AssetBundle
+class ModalButtonAsset extends AssetBundle
 {
     /**
      * @inheritdoc
@@ -31,7 +31,7 @@ class ShowModalButtonAsset extends AssetBundle
      * @inheritdoc
      */
     public $js = [
-        'js/show-modal-button.js',
+        'js/modal-button.js',
     ];
 
     /**

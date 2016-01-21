@@ -9,7 +9,15 @@ $(document).on('click', '.gridviewCheckboxModalButton', function() {
             dataType: 'json',
             error: function(xhr, status, error) {
                 if(xhr.status==200) {
-                    return loadModal(url);
+                    $('#modal').modal('show')
+                            .find('#modal-content')
+                            .load(url);
+                    $('#modal').on('shown.bs.modal', function () {
+                        $('textarea:visible:first').focus();
+                        $('input:visible:first').focus();
+                    })
+
+                    return true;
                 }
 
                 if(xhr.status==403) {
@@ -17,27 +25,8 @@ $(document).on('click', '.gridviewCheckboxModalButton', function() {
                     return false;
                 }
 
-                swal('Error', getErrorMessage(xhr.responseText), "error");
+                swal('Error', getErrorMessage(xhr.responseText.substring(11)), "error");
             }
         });
     }
 });
-
-function loadModal(url, data) {
-
-    $('#modal').find('#modalContent')
-        .html("<div style='text-align: center;'><img src='/images/ajax-loader.gif' /></div>");
-    $('#modal').modal('show')
-            .find('#modalContent')
-            .load(url);
-    $('#modal').on('shown.bs.modal', function () {
-        $('textarea:visible:first').focus();
-        $('input:visible:first').focus();
-    })
-
-    return true;
-};
-
-function getErrorMessage(message) {
-    return message.substring(11);
-};

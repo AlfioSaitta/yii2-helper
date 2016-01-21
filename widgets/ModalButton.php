@@ -7,7 +7,7 @@
 
 namespace anli\helper\widgets;
 
-use anli\helper\assets\ShowModalButtonAsset;
+use anli\helper\assets\ModalButtonAsset;
 use Yii;
 use yii\bootstrap\Widget;
 use yii\helpers\Html;
@@ -41,20 +41,30 @@ class ModalButton extends Widget
     public $options = [];
 
     /**
+     * @var string
+     */
+    public $type = 'button';
+
+    /**
      * Renders the widget.
      */
     public function run()
     {
-        $buttonOptions = [
-            'class' => 'showModalButton',
+        $options = array_merge([
             'value' => $this->url,
             'data-modal-id' => $this->modalId,
-        ];
+        ], $this->options);
 
-        ShowModalButtonAsset::register(Yii::$app->controller->getView());
-        Html::addCssClass($buttonOptions, $this->options);
+        ModalButtonAsset::register(Yii::$app->controller->getView());
+        Html::addCssClass($options, ['class' => 'show-modal-button']);
 
-        echo Html::button($this->label, $buttonOptions);
+        if ('button' == $this->type) {
+            return Html::button($this->label, $options);
+        }
+
+        if ('link' == $this->type) {
+            return Html::a($this->label, false, $options);
+        }
     }
 
 }
