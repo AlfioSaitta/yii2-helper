@@ -66,6 +66,16 @@ class CreateAction extends Action
     public $redirectToViewUrl = null;
 
     /**
+     * @var array
+     */
+    public $gridviewCheckboxOptions = [];
+
+    /**
+     * @var mixed
+     */
+    public $textField = 'id';
+
+    /**
      * @inheritdoc
      */
     public function init()
@@ -94,8 +104,13 @@ class CreateAction extends Action
         }
 
         if ($model->load(Yii::$app->request->post())) {
+            $textField = $this->textField;
 
             if ($model->save()) {
+
+                if (!empty($this->gridviewCheckboxOptions)) {
+                    $this->gridviewCheckbox();
+                }
 
                 if ($this->isSaveAndNew) {
                     Yii::$app->response->format = Response::FORMAT_JSON;
@@ -103,6 +118,8 @@ class CreateAction extends Action
                         'message' => 'saveAndNew',
                         'success' => true,
                         'saveAndNewUrl' => $this->saveAndNewUrl,
+                        'id' => $model->id,
+                        'text' => $model->$textField,
                     ];
                 }
 
@@ -115,6 +132,8 @@ class CreateAction extends Action
                 return [
                     'message' => 'success',
                     'success' => true,
+                    'id' => $model->id,
+                    'text' => $model->$textField,
                 ];
             }
 
@@ -144,4 +163,13 @@ class CreateAction extends Action
 
         return true;
 	}
+
+    /**
+     * @return boolean
+     */
+    protected function gridviewCheckbox()
+    {
+        $function = $this->gridviewCheckboxOptions['functionName'];
+        return $this->model->$function($this->gridviewCheckboxOptions['ids']);
+    }
 }

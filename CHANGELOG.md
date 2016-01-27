@@ -1,5 +1,17 @@
 CHANGELOG
 =====
+2.0.0 [27 Jan 2015]
+-----
+
+* `enh` Added modal assets, widget, sweetalert and ajax delete asset
+* `enh` Added toastr, ajax delete and refactor grid column
+* `enh` Added list action, modal form and grid view updates
+* `enh` Added auto complete action
+* `chg` Updated README on autocomplete
+* `chg` Updated ajax update
+* `chg` Updated import and list action
+* `enh` Added secondary modal feature
+* `chg` Updated refactor modal button
 
 1.9.0 [10 Dec 2015]
 -----

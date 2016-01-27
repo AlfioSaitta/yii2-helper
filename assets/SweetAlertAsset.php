@@ -10,30 +10,34 @@ namespace anli\helper\assets;
 use yii\web\AssetBundle;
 
 /**
- * This is the ajax update asset bundle.
+ * This is the sweet alert asset bundle.
  * @author Su Anli <anli@euqol.com>
- * @since 1.2.0
+ * @since 1.0.0
  */
-class AjaxUpdateAsset extends AssetBundle
+class SweetAlertAsset extends AssetBundle
 {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/anli/yii2-helper/';
+    public $sourcePath = '@bower/sweetalert/';
+
+    /**
+     * @inheritdoc
+     */
+    public $css = [
+        'dist/sweetalert.css',
+    ];
 
     /**
      * @inheritdoc
      */
     public $js = [
-        'js/ajax-update.js',
+        'dist/sweetalert.min.js',
     ];
 
     /**
      * @inheritdoc
      */
     public $depends = [
-        'anli\helper\assets\SweetAlertAsset',
-        'yii\web\YiiAsset',
-        'yii\bootstrap\BootstrapAsset',
     ];
 }

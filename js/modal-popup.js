@@ -5,17 +5,21 @@ $(function(){
     //the same link.
 //we use on so the dom element can be called again if they are nested, otherwise when we load the content once it kills the dom element and wont let you load anther modal on click without a page refresh
       $(document).on('click', '.showModalButton', function(){
-        //check if the modal is open. if it's open just reload content not whole modal
-        //also this allows you to nest buttons inside of modals to reload the content it is in
-        //the if else are intentionally separated instead of put into a function to get the
-        //button since it is using a class not an #id so there are many of them and we need
-        //to ensure we get the right button and content.
-        $('#modal').find('#modalContent')
+        console.log('test');
+        var modalId;
+
+        if ($(this).attr('data-modal-id')) {
+            modalId = '#' + $(this).attr('data-modal-id');
+        } else {
+            modalId = '#modal';
+        }
+
+        $(modalId).find('.modal-content')
             .html("<div style='text-align: center;'><img src='/images/ajax-loader.gif' /></div>");
-        $('#modal').modal('show')
-                .find('#modalContent')
+        $(modalId).modal('show')
+                .find('.modal-content')
                 .load($(this).attr('value'));
-        $('#modal').on('shown.bs.modal', function () {
+        $(modalId).on('shown.bs.modal', function () {
             $('textarea:visible:first').focus();
             $('input:visible:first').focus();
         })

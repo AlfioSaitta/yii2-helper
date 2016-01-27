@@ -359,3 +359,49 @@ Add to the `action` section of your controller with:
     'saveAndNewUrl' => Url::to(['timesheet/create']),
 ],
 ```
+
+Toastr
+-----
+
+Add to your layout:
+
+```
+<?php Pjax::begin(['id' => 'pjax-message']); ?>
+<?php anli\helper\widgets\Toastr::widget(); ?>
+<?php Pjax::end(); ?>
+```
+
+Auto Complete
+-----
+
+Add to your form:
+
+```
+<?= $form->field($model, 'name')->widget(AutoComplete::classname(), [
+    'clientOptions' => [
+        'source'=> new JsExpression("function(request, response) {
+            $.getJSON('" . Url::to(['/invoice/name-auto-complete']) . "', {
+                term: request.term,
+                supplierId: $(\"#invoice-supplier_id\").val(),
+            }, response);
+        }"),
+        'minLength' => 2,
+    ],
+    'options' => ['class' => 'form-control', 'placeholder' => 'Filter as you type ...'],
+]); ?>
+```
+
+Add to the action section of your controller:
+
+```
+'name-auto-complete' => [
+    'class' => 'anli\helper\actions\AutoCompleteAction',
+    'query' => Invoice::find()
+        ->select(['name as label'])
+        ->andWhere(['supplier_id' => Yii::$app->getRequest()->getQueryParam('supplierId')])
+        ->andWhere(['like', 'name', Yii::$app->getRequest()->getQueryParam('term')])
+        ->limit(20)
+        ->distinct(),
+    'term' => Yii::$app->getRequest()->getQueryParam('term'),
+],
+```

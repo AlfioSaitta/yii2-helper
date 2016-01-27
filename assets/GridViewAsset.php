@@ -26,6 +26,7 @@ class GridviewAsset extends AssetBundle
      */
     public $js = [
         'js/gridview-checkbox.js',
+        'js/gridview-checkbox-modal.js',
     ];
 
     /**

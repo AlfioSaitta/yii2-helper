@@ -10,29 +10,35 @@ namespace anli\helper\assets;
 use yii\web\AssetBundle;
 
 /**
- * This is the ajax update asset bundle.
+ * This is the toastr asset bundle.
  * @author Su Anli <anli@euqol.com>
- * @since 1.2.0
+ * @since 2.0.0
  */
-class AjaxUpdateAsset extends AssetBundle
+class ToastrAsset extends AssetBundle
 {
     /**
      * @inheritdoc
      */
-    public $sourcePath = '@vendor/anli/yii2-helper/';
+    public $sourcePath = '@bower/toastr/';
+
+    /**
+     * @inheritdoc
+     */
+    public $css = [
+        'toastr.min.css',
+    ];
 
     /**
      * @inheritdoc
      */
     public $js = [
-        'js/ajax-update.js',
+        'toastr.min.js',
     ];
 
     /**
      * @inheritdoc
      */
     public $depends = [
-        'anli\helper\assets\SweetAlertAsset',
         'yii\web\YiiAsset',
         'yii\bootstrap\BootstrapAsset',
     ];

@@ -114,11 +114,11 @@ class ImportAction extends Action
             $file = UploadedFile::getInstance($model, 'file');
 
             if ($this->import($this->getArrayFromExcel($file->tempName), $this->importModelName)) {
-                //Yii::$app->getSession()->setFlash('success', 'You have imported the excel!');
+                Yii::$app->getSession()->setFlash('success', 'You have imported the excel!');
                 return $this->controller->goBack();
             };
 
-            //Yii::$app->getSession()->setFlash('error', "You have failed to import the excel!\n{$this->msg}");
+            Yii::$app->getSession()->setFlash('error', "You have failed to import the excel!\n{$this->msg}");
             return $this->controller->goBack();
         }
 

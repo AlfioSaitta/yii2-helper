@@ -17,7 +17,9 @@
         "kartik-v/yii2-datecontrol": "dev-master",
         "kartik-v/yii2-grid": "@dev",
         "kartik-v/yii2-date-range": "*",
-        "mpdf/mpdf": "*"
+        "mpdf/mpdf": "*",
+        "bower-asset/sweetalert": "*",
+        "bower-asset/toastr": "*"
     },
     "autoload": {
         "psr-4": {

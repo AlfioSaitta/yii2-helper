@@ -1,0 +1,7 @@
+.hint-block {
+    display: none;
+}
+label.help {
+    border-bottom: 1px dashed #888;
+    cursor: help;
+}
